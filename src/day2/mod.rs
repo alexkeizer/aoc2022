@@ -20,7 +20,7 @@ fn part1() {
                     }
                 };
 
-                let piece = (me + 1);
+                let piece = me + 1;
                 let score = (win_or_lose + piece) as u32;
 
 
