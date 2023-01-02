@@ -1,4 +1,4 @@
-use std::fmt::{Formatter, Write};
+use std::fmt::{Formatter};
 use std::ops::{Index, IndexMut};
 use pest::Parser;
 use pest_derive::Parser;
@@ -296,9 +296,7 @@ fn part2() {
     let p = Program::parse(include_str!("input.txt"));
     let mut screen = Crt::new();
 
-    let mut exe = p.execute().trace();
-    for (state, inst) in exe {
-
+    for (state, _) in p.execute().trace() {
         screen.draw_pixel(state)
     }
 
