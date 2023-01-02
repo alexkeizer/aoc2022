@@ -231,16 +231,19 @@ fn dijkstra(map: &HeightMap) -> Matrix<u32> {
 }
 
 
-fn part1() {
-    let map = HeightMap::from_str(include_str!("input.txt"));
+#[aoc(day12, part1)]
+fn part1(input: &str) -> u32 {
+    let map = HeightMap::from_str(input);
     eprintln!("{:?}", map.inner);
     let d = dijkstra(&map);
     eprintln!("{:?}", d);
-    eprintln!("start_distance = {:?}", &d[map.start])
+
+    d[map.start]
 }
 
-fn part2() {
-    let map = HeightMap::from_str(include_str!("input.txt"));
+#[aoc(day12, part2)]
+fn part2(input: &str) -> u32  {
+    let map = HeightMap::from_str(input);
     eprintln!("{:?}", map.inner);
     let d = dijkstra(&map);
     eprintln!("{:?}", d);
@@ -250,10 +253,5 @@ fn part2() {
         .min_by_key(|(_, d)| **d)
         .unwrap();
 
-    eprintln!("min = {:?}", d);
-}
-
-
-pub fn main() {
-    part2()
+    *d
 }
