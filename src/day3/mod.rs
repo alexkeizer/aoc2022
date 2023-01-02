@@ -19,46 +19,41 @@ fn from_priority(x: u8) -> char {
 }
 
 
-fn part1() {
-    let input: &'static str = include_str!("./input.txt");
+#[aoc(day3, part1)]
+fn part1(input: &str) -> u32 {
+    input
+        .lines()
+        .map(|line| {
+            let half = line.len() / 2;
 
-    let total: u32 =
-        input
-            .lines()
-            .map(|line| {
-                let half = line.len() / 2;
-
-                println!("{}: {}_{}", line, &line[..half], &line[half..]);
-                let line = line.as_bytes();
+            println!("{}: {}_{}", line, &line[..half], &line[half..]);
+            let line = line.as_bytes();
 
 
-                let mut map = [false; 52];
-                for &c in &line[..half] {
-                    map[to_priority(c) as usize] = true;
+            let mut map = [false; 52];
+            for &c in &line[..half] {
+                map[to_priority(c) as usize] = true;
+            }
+
+            let mut map2 = [false; 52];
+            let mut total = 0;
+            for &c in &line[half..] {
+                let p = to_priority(c);
+                if map[p as usize] && !map2[p as usize] {
+                    println!("  {}: {}", c as char, p + 1);
+                    map2[p as usize] = true;
+                    total += p as u32 + 1;
                 }
+            }
 
-                let mut map2 = [false; 52];
-                let mut total = 0;
-                for &c in &line[half..] {
-                    let p = to_priority(c);
-                    if map[p as usize] && !map2[p as usize] {
-                        println!("  {}: {}", c as char, p + 1);
-                        map2[p as usize] = true;
-                        total += p as u32 + 1;
-                    }
-                }
-
-                println!("total (line): {}\n", total);
-                total
-            })
-            .sum();
-
-    println!("{}", total)
+            println!("total (line): {}\n", total);
+            total
+        })
+        .sum()
 }
 
-fn part2() {
-    let input: &'static str = include_str!("./input.txt");
-
+#[aoc(day3, part2)]
+fn part2(input: &str) -> usize {
     let mut index = 0;
     let mut map = [[false; 52]; 3];
     let mut total = 0;
@@ -82,9 +77,5 @@ fn part2() {
         }
     }
 
-    println!("{}", total)
-}
-
-pub fn main() {
-    part2()
+    total
 }

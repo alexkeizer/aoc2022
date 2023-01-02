@@ -1,6 +1,6 @@
 use regex::Regex;
 
-fn part1() {
+pub fn part1() {
     let re = Regex::new("^(\\d+)-(\\d+),(\\d+)-(\\d+)$").unwrap();
 
     let c =
@@ -30,7 +30,7 @@ fn part1() {
     println!("{}", c)
 }
 
-fn part2() {
+pub fn part2() {
     let re = Regex::new("^(\\d+)-(\\d+),(\\d+)-(\\d+)$").unwrap();
 
     let c =

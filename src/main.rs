@@ -4,5 +4,5 @@
 // aoc_main! { lib = aoc2022 }
 
 fn main() {
-    aoc2022::day25::main();
+    aoc2022::day5::main();
 }

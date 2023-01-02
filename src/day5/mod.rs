@@ -31,9 +31,8 @@ struct Move {
     to: u8,
 }
 
-fn part1() {
-    let input = include_str!("./test.txt");
-
+#[aoc(day5, part1)]
+fn part1(input: &str) -> u32 {
     let parse = MyParser::parse(Rule::file, input)
         .expect("Parse Error")
         .next().unwrap()
@@ -56,6 +55,7 @@ fn part1() {
         // }
     }
 
+    0
 }
 
 // fn part1() {
@@ -92,5 +92,5 @@ fn part1() {
 // }
 
 pub fn main() {
-    part1()
+    part1(include_str!("./test.txt"));
 }

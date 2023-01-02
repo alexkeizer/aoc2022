@@ -184,22 +184,20 @@ impl Execution {
 // *************************************************************************************************
 
 
-fn part1() {
-    let p = Program::parse(include_str!("input.txt"));
-    let sum_of_signal_strengths: i64 =
-        p.execute()
-            .trace()
-            .filter(|(state, _)| {
-                let c = state.cycle;
-                c == 20 || (c > 20 && (c - 20) % 40 == 0)
-            })
-            .map(|(state, _)| {
-                state.x * state.cycle as i64
-            })
-            .inspect(|signal_strength| println!("    -- signal strength = {signal_strength}"))
-            .sum();
-
-    println!("sum of signal strengths: {sum_of_signal_strengths}");
+#[aoc(day10, part1)]
+fn part1(input: &str) -> i64 {
+    let p = Program::parse(input);
+    p.execute()
+        .trace()
+        .filter(|(state, _)| {
+            let c = state.cycle;
+            c == 20 || (c > 20 && (c - 20) % 40 == 0)
+        })
+        .map(|(state, _)| {
+            state.x * state.cycle as i64
+        })
+        .inspect(|signal_strength| println!("    -- signal strength = {signal_strength}"))
+        .sum()
 }
 
 
@@ -213,7 +211,7 @@ impl Crt {
 }
 
 struct Crt {
-    pixels: [[bool; Self::WIDTH]; Self::HEIGHT]
+    pixels: [[bool; Self::WIDTH]; Self::HEIGHT],
 }
 
 struct CrtCoord {
@@ -240,7 +238,7 @@ impl ProgramState {
         let c = self.cycle - 1;
         let col = c % Crt::WIDTH;
         let row = c / Crt::WIDTH;
-        CrtCoord {col, row}
+        CrtCoord { col, row }
     }
 }
 
@@ -266,7 +264,7 @@ impl std::fmt::Display for Crt {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         for row in &self.pixels {
             for &pixel_is_set in row {
-                write!(f, "{}", if pixel_is_set {'#'} else {' '})?;
+                write!(f, "{}", if pixel_is_set { '#' } else { ' ' })?;
             }
             writeln!(f)?;
         }
@@ -279,7 +277,7 @@ impl std::fmt::Debug for Crt {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         for row in &self.pixels {
             for &pixel_is_set in row {
-                write!(f, "{}", if pixel_is_set {'#'} else {'.'})?;
+                write!(f, "{}", if pixel_is_set { '#' } else { '.' })?;
             }
             writeln!(f)?;
         }
@@ -292,20 +290,17 @@ impl std::fmt::Debug for Crt {
 // *************************************************************************************************
 
 
-fn part2() {
-    let p = Program::parse(include_str!("input.txt"));
+#[aoc(day10, part2)]
+fn part2(input: &str) -> Crt {
+    let p = Program::parse(input);
     let mut screen = Crt::new();
 
     for (state, _) in p.execute().trace() {
         screen.draw_pixel(state)
     }
 
-    println!("{screen}");
+    screen
 }
 
 
 // *************************************************************************************************
-
-pub fn main() {
-    part2();
-}

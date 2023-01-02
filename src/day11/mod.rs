@@ -301,26 +301,19 @@ impl Monkeys {
 }
 
 
-fn part1() {
-    let m = Monkeys::parse(include_str!("test.txt"));
+#[aoc(day11, part1)]
+fn part1(data: &str) -> u64 {
+    let m = Monkeys::parse(data);
 
-    println!("monkey business: {}",
-             m.get_monkey_business(true, 20)
-    );
+    m.get_monkey_business(true, 20)
 }
 
 
-fn part2() {
-    let m = Monkeys::parse(include_str!("input.txt"));
+#[aoc(day11, part2)]
+fn part2(data: &str) -> u64 {
+    let m = Monkeys::parse(data);
 
     println!("{:#?}", m);
 
-    println!("monkey business: {}",
-             m.get_monkey_business(false, 10_000)
-    );
-}
-
-
-pub fn main() {
-    part2()
+    m.get_monkey_business(false, 10_000)
 }
