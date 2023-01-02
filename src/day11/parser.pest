@@ -1,0 +1,42 @@
+
+num = @{ ASCII_DIGIT+ }
+
+WHITESPACE = _{ " " }
+
+
+
+
+
+
+
+
+monkey_name = {"Monkey " ~ num ~ ":" ~ NEWLINE}
+
+starting_items = {
+    "Starting items: " ~ num ~ ("," ~ num)* ~ NEWLINE
+}
+
+old = @{ "old" }
+binop = {"+" | "*"}
+operation = {
+    "Operation: new = " ~ old ~ (binop ~ (old | num))? ~ NEWLINE
+}
+
+test_true =  { "If true: throw to monkey " ~ num}
+test_false = { "If false: throw to monkey " ~ num}
+test = {
+    "Test: divisible by " ~ num ~ NEWLINE
+    ~ test_true ~ NEWLINE
+    ~ test_false
+}
+
+monkey = {
+    monkey_name
+    ~ starting_items
+    ~ operation
+    ~ test
+}
+
+file = {
+    SOI ~ monkey ~ (NEWLINE+ ~ monkey)+ ~ NEWLINE* ~ EOI
+}
