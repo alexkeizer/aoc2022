@@ -1,6 +1,7 @@
 use std::num::NonZeroU8;
 use regex::Regex;
 use pest::Parser;
+use pest_derive::Parser;
 
 #[derive(Parser)]
 #[grammar_inline=r#"

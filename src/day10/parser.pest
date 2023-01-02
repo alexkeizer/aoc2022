@@ -1,0 +1,16 @@
+
+WHITESPACE = _{ " " }
+
+int = @{ "-"? ~ ASCII_DIGIT+ }
+
+
+noop = {"noop"}
+addx = {"addx" ~ int}
+
+inst = {
+    noop | addx
+}
+
+program = {
+    SOI ~ inst ~ (NEWLINE ~ inst)* ~ NEWLINE* ~ EOI
+}
