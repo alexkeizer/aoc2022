@@ -1,5 +1,8 @@
 #[allow(dead_code)]
 
+#[macro_use]
+extern crate pest_derive;
+
 mod day1;
 mod day2;
 mod day3;
@@ -8,5 +11,5 @@ mod day5;
 mod day12;
 
 fn main() {
-    day12::main()
+    day5::main()
 }
