@@ -13,22 +13,27 @@ filename = @{
 }
 
 cd_cmd = {
-    "cd" ~ filename ~ NEWLINE
+    "cd" ~ filename
 }
 
 ls_dir  = {"dir" ~ filename}
 ls_file = {num ~ filename}
 ls_cmd = {
-    "ls" ~ NEWLINE
-    ~ ((ls_dir | ls_file) ~ NEWLINE)*
+    "ls"
+    ~ (NEWLINE ~ (ls_dir | ls_file))*
 }
 
 cmd = {
-    "$ cd /" ~ NEWLINE ~
     "$" ~ (
         cd_cmd
         | ls_cmd
     )
 }
 
-file = { cmd+ }
+file = {
+    SOI ~
+    "$ cd /" ~ NEWLINE
+    ~ cmd ~ (NEWLINE ~ cmd)*
+    ~ NEWLINE?
+    ~ EOI
+}

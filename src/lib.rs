@@ -1,5 +1,3 @@
-extern crate core;
-
 #[macro_use]
 extern crate aoc_runner_derive;
 
