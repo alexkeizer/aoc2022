@@ -3,6 +3,8 @@
 // use aoc_runner_derive::aoc_main;
 // aoc_main! { lib = aoc2022 }
 
+mod day7;
+
 fn main() {
-    aoc2022::day5::main();
+    day7::main();
 }

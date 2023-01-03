@@ -1,0 +1,34 @@
+//
+// Created by intellij-pest on 2023-01-03
+// commands
+// Author: alex
+//
+
+WHITESPACE = _{ " " }
+
+num = @{ ASCII_DIGIT+ }
+
+filename = @{
+    (ASCII_ALPHANUMERIC | ".")+
+}
+
+cd_cmd = {
+    "cd" ~ filename ~ NEWLINE
+}
+
+ls_dir  = {"dir" ~ filename}
+ls_file = {num ~ filename}
+ls_cmd = {
+    "ls" ~ NEWLINE
+    ~ ((ls_dir | ls_file) ~ NEWLINE)*
+}
+
+cmd = {
+    "$ cd /" ~ NEWLINE ~
+    "$" ~ (
+        cd_cmd
+        | ls_cmd
+    )
+}
+
+file = { cmd+ }
