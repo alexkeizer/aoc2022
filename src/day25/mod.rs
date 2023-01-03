@@ -195,7 +195,6 @@ pub fn main() {
 
 #[cfg(test)]
 mod tests {
-    use proptest::prelude::*;
     use super::*;
 
     const DATA: &[(i64, &str)] = &[
@@ -247,13 +246,4 @@ mod tests {
             assert_eq!(SnafuNum::from_value(val), snafu)
         }
     }
-
-
-    // proptest! {
-    //     #[test]
-    //     fn proptest_snafu_num_from_value(num: SnafuNum) {
-    //         let round_trip = SnafuNum::from_value(num.value());
-    //         // prop_assert_eq!(num, round_trip)
-    //     }
-    // }
 }
