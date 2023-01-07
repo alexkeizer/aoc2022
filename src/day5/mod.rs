@@ -103,7 +103,7 @@ impl Crate {
         match crat.as_rule() {
             Rule::crat_some => {
                 Some(Self::from_ascii(
-                    crat.as_str().bytes().nth(1).unwrap()
+                    crat.as_str().as_bytes()[1]
                 ))
             }
             _ => {
